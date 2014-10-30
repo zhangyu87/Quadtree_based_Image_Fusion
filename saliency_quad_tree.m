@@ -1,4 +1,3 @@
-
 % Matlab demo code for "Quadtree-based multi-focus image fusion using a weighted focus-measure, Information Fusion 22 (2015) 105¨C118". 
 % Implemented by ZhangYu, Image Processing Center, BUAA
 
