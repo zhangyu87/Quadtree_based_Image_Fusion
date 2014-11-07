@@ -21,6 +21,7 @@ NextLine = sprintf('\n');
 % 4.toy
 % 5.OpenGL
 % 6.disk
+% 7. toy
 % -------------------------------------------------------------------------
 
 for name = 1 : 8
@@ -29,7 +30,9 @@ for name = 1 : 8
     level = 0;
     % Initialise the maximum block size permitted
     pmax = 0;
-    
+    % default image number and type
+	N = 2; type = '.bmp';
+	
     % Set the Image name 
     switch name 
         case 1 
@@ -45,7 +48,7 @@ for name = 1 : 8
         case 6 
             str = 'disk';
         case 7
-            str = 'toy';
+            str = 'toy'; N = 3;
         case 8 
             str = 'Image_';
     end
@@ -59,28 +62,6 @@ for name = 1 : 8
     % ---------------------------------------------------------------------
 
     for opt = 2
-
-        % read the number of source images in accordance with the image set
-        type = '.bmp';
-        switch str
-            case 'clock'
-                N = 2; 
-            case 'lab'
-                N = 2; 
-            case 'pepsi'
-                N = 2; 
-            case 'OpenGL'
-                N = 2; 
-            case 'flower'
-                N = 2; 
-            case 'disk'
-                N = 2;
-            case 'toy'
-                N = 3; 
-            case 'Image_'
-                N = 2;
-        end
-
         % Get dimensions of multi-focus images
         inImg = double(imread (strcat('example images\',str,num2str(1),type)));
         [p1,p2,p3] = size(inImg);
@@ -118,7 +99,6 @@ for name = 1 : 8
         % -----------------------------------------------------------------
         tic
         
-
         % -----------------------------------------------------------------
         % Compute the gradient map and Focus measures,
         % opt = 1: SML; 
