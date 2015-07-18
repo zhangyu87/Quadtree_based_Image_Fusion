@@ -1,5 +1,6 @@
-% Matlab demo code for "Quadtree-based multi-focus image fusion using a weighted focus-measure, Information Fusion 22 (2015) 105¨C118". 
+% Matlab demo code for "Quadtree-based multi-focus image fusion using a weighted focus-measure, Information Fusion 22 (2015) 105Â¨C118". 
 % Implemented by ZhangYu, Image Processing Center, BUAA
+% Email: uzeful@163.com
 
 % -------------------------------------------------------------------------
 % Clear history and memory
@@ -24,7 +25,7 @@ NextLine = sprintf('\n');
 % 7. toy
 % -------------------------------------------------------------------------
 
-for name = 1 : 8
+for name = 1 : 7
 
     % Initialise the maximum split level
     level = 0;
@@ -49,8 +50,6 @@ for name = 1 : 8
             str = 'disk';
         case 7
             str = 'toy'; N = 3;
-        case 8 
-            str = 'Image_';
     end
     fprintf('Processing Image %s :\n',  str);
     
@@ -242,68 +241,6 @@ for name = 1 : 8
         %------------------------------------------------------------------
         toc
         t = toc;
-        
-        
-        %------------------------------------------------------------------
-        % Show the decompsition on the extended decision map
-        %------------------------------------------------------------------
-
-        % The detected focused regions
-        map = uint8(Fusion_tag / N * 255);  
-        
-        % Initialize the image
-        blocks = repmat(uint8(0),size(S));
-
-        blocks(dx + 1 : dx + p1, dy + 1 : dy + p2) = map(dx + 1 : dx + p1, dy + 1 : dy + p2);
-        blocks1 = blocks;
-        blocks2 = blocks;
-        blocks3 = blocks;
-        
-        % Color the decompositions
-        blocks1 = block_values(blocks1, S, maxDim, uint8(255));
-        blocks2 = block_values(blocks2, S, maxDim, uint8(0));
-        blocks3 = block_values(blocks3, S, maxDim, uint8(0));
-        
-        qt(:,:,1) = blocks1;
-        qt(:,:,2) = blocks2;
-        qt(:,:,3) = blocks3;
-        
-        qt = uint8(qt);
-        
-        % show the decomposition on the decision map
-        blocks = mat2gray(blocks);
-        figure, imshow(qt,[])
-        
-        % clear the memory
-        clear qt;
-
-        %------------------------------------------------------------------
-        % Show the decompsition on the extended fusion image
-        %------------------------------------------------------------------
-       
-        % Initialize image 
-        f = blocks;
-        f(dx + 1 : dx + p1, dy + 1 : dy + p2) = FImg;
-        f1 = f;
-        f2 = f;
-        f3 = f;
-        
-        % Color the decomposition
-        f1 = block_values(f1, S, maxDim, uint8(255));
-        f2 = block_values(f2, S, maxDim, uint8(0));
-        f3 = block_values(f3, S, maxDim, uint8(0));
-
-        qt(:,:,1) = f1;
-        qt(:,:,2) = f2;
-        qt(:,:,3) = f3;
-        qt = uint8(qt);
-        
-        % Show the decomposition
-        blocks = mat2gray(blocks);
-        figure, imshow(qt,[])
-        
-        % Clear memory
-        clear qt;
         
         % Show the fusion image and the corresponding decision map
         figure,imshow(FImg);
